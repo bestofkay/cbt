@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: root_secret
+          MYSQL_DATABASE: cbt
+          MYSQL_USER: cbt
+          MYSQL_PASSWORD: cbt_secret
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot_secret"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      DATABASE_URL: mysql://cbt:cbt_secret@127.0.0.1:3306/cbt
+      JWT_ACCESS_SECRET: ci-access-secret-change-me-32chars!
+      JWT_REFRESH_SECRET: ci-refresh-secret-change-me-32chars
+      ENCRYPTION_KEY: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      SMTP_MODE: console
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm --filter @cbt/shared build
+      - run: pnpm --filter @cbt/domain build
+      - run: pnpm --filter @cbt/database generate
+      - run: pnpm --filter @cbt/database migrate:deploy
+      - run: pnpm --filter @cbt/database seed
+      - run: pnpm --filter @cbt/domain test
+      - run: pnpm --filter @cbt/api typecheck
+      - run: pnpm --filter @cbt/api build
+      - run: pnpm --filter @cbt/worker build
+      - run: pnpm --filter @cbt/web-admin exec tsc --noEmit
+      - run: pnpm --filter @cbt/web-candidate exec tsc --noEmit
+      - run: pnpm --filter @cbt/web-proctor exec tsc --noEmit

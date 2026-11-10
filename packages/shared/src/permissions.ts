@@ -1,0 +1,53 @@
+export const PERMISSIONS = {
+  USERS_READ: 'users:read',
+  USERS_WRITE: 'users:write',
+  USERS_DELETE: 'users:delete',
+  ROLES_READ: 'roles:read',
+  ROLES_WRITE: 'roles:write',
+  QUESTIONS_READ: 'questions:read',
+  QUESTIONS_WRITE: 'questions:write',
+  QUESTIONS_REVIEW: 'questions:review',
+  QUESTIONS_DELETE: 'questions:delete',
+  BANKS_READ: 'banks:read',
+  BANKS_WRITE: 'banks:write',
+  EXAMS_READ: 'exams:read',
+  EXAMS_WRITE: 'exams:write',
+  EXAMS_PUBLISH: 'exams:publish',
+  SESSIONS_READ: 'sessions:read',
+  SESSIONS_WRITE: 'sessions:write',
+  ATTEMPTS_READ: 'attempts:read',
+  ATTEMPTS_TAKE: 'attempts:take',
+  ATTEMPTS_GRADE: 'attempts:grade',
+  PROCTOR_MONITOR: 'proctor:monitor',
+  PROCTOR_MANAGE: 'proctor:manage',
+  RESULTS_READ: 'results:read',
+  RESULTS_EXPORT: 'results:export',
+  REPORTS_READ: 'reports:read',
+  BILLING_READ: 'billing:read',
+  BILLING_WRITE: 'billing:write',
+  NOTIFICATIONS_WRITE: 'notifications:write',
+  AUDIT_READ: 'audit:read',
+  SUPPORT_READ: 'support:read',
+  SUPPORT_WRITE: 'support:write',
+  SETTINGS_READ: 'settings:read',
+  SETTINGS_WRITE: 'settings:write',
+  FEATURE_FLAGS_WRITE: 'feature_flags:write',
+} as const;
+
+export type PermissionCode = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
+
+export const ROLE_CODES = {
+  SUPER_ADMIN: 'SUPER_ADMIN',
+  ADMIN: 'ADMIN',
+  EXAM_MANAGER: 'EXAM_MANAGER',
+  QUESTION_REVIEWER: 'QUESTION_REVIEWER',
+  QUESTION_AUTHOR: 'QUESTION_AUTHOR',
+  PROCTOR: 'PROCTOR',
+  INVIGILATOR: 'INVIGILATOR',
+  FINANCE: 'FINANCE',
+  AUDITOR: 'AUDITOR',
+  SUPPORT: 'SUPPORT',
+  CANDIDATE: 'CANDIDATE',
+} as const;
+
+export type RoleCode = (typeof ROLE_CODES)[keyof typeof ROLE_CODES];

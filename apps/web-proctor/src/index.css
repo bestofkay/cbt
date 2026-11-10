@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply min-h-screen font-sans text-slate-100;
+    background-color: #071a19;
+    background-image:
+      radial-gradient(ellipse 70% 45% at 0% 0%, rgba(20, 184, 166, 0.18), transparent 55%),
+      radial-gradient(ellipse 50% 35% at 100% 10%, rgba(245, 158, 11, 0.12), transparent 50%),
+      linear-gradient(180deg, #0a1f1e 0%, #061413 100%);
+    background-attachment: fixed;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-slate-950;
+  }
+
+  ::selection {
+    @apply bg-primary-700 text-white;
+  }
+}
+
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}

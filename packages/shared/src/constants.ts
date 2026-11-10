@@ -1,0 +1,31 @@
+export const API_VERSION = 'v1';
+export const API_PREFIX = `/api/${API_VERSION}`;
+
+export const QUESTION_TYPES = [
+  'MULTIPLE_CHOICE',
+  'MULTIPLE_RESPONSE',
+  'TRUE_FALSE',
+  'ESSAY',
+  'NUMERIC',
+  'CODE_EDITOR',
+  'SQL_QUERY',
+  'FILL_BLANK',
+  'MATCHING',
+  'ORDERING',
+  'MATRIX',
+  'HOTSPOT',
+  'IMAGE_SELECTION',
+  'VIDEO_QUESTION',
+  'AUDIO_QUESTION',
+  'DRAG_DROP',
+  'CASE_STUDY',
+  'PROGRAMMING_CHALLENGE',
+] as const;
+
+export const DIFFICULTIES = [
+  'VERY_EASY',
+  'EASY',
+  'MEDIUM',
+  'HARD',
+  'VERY_HARD',
+] as const;
